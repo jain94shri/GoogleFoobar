@@ -1,0 +1,46 @@
+def solution(l):
+    # Your code here
+    output = l
+    total = 0
+    output.sort()
+    result = 0
+    
+    for ele in range(0, len(output)): 
+        total = total + output[ele] 
+        
+    if (total % 3 == 0):
+        for ele in range(len(output)-1, -1, -1):
+            result = output[ele] + 10*result
+        
+    else:
+        remNumber = total%3
+        rem = []
+        rem0 = []
+        rem1 = []
+        rem2 = []
+        for ele in range(0, len(output)):
+            if output[ele] % 3 == 0:
+                rem0.append(output[ele])
+            elif output[ele] % 3 == 1:
+                rem1.append(output[ele])
+            else:
+                rem2.append(output[ele])
+        if(remNumber == 1) and len(rem1) > 0:
+            rem1.pop(0)
+        elif( remNumber == 1 ) and len(rem1) == 0 and len(rem2) > 1:
+            rem2.pop(0)
+            rem2.pop(0)
+        elif(remNumber == 2) and len(rem2) > 0:
+            rem2.pop(0)
+        elif(remNumber == 2) and len(rem2) == 0 and len(rem1) > 1:
+            rem1.pop(0)
+            rem1.pop(0)
+        rem = rem0 + rem1 + rem2
+        rem.sort(reverse = True)
+        for ele in range(0, len(rem)):
+            result = rem[ele] + 10*result
+    
+    return result
+    
+res = solution([3,1,4, 1])
+print(res)
